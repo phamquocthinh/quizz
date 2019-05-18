@@ -25,8 +25,7 @@ class Main extends React.Component {
     pushData(questNum) {
         this.setState({
             question: data[questNum].question,
-            answers: [data[questNum].answers[0], data[questNum].answers[1], data[questNum].answers[2], data[questNum].answers[3] ],
-            correct: data[questNum].correct,
+            answers: data[questNum].answers,
             questNum: this.state.questNum + 1
         })
     }
@@ -77,12 +76,12 @@ class Main extends React.Component {
     }
 
     render() {
-        let { questNum, total, question, answers, showButton, questionAnswered, displayPopup, result} = this.state
+        let { questNum, total, answers, showButton, questionAnswered, displayPopup, result} = this.state
 
         return (
             <div className="container">
 
-                <Popup style={{display: displayPopup}} result={result} startQuiz={this.handleStartQuiz}/>
+                <Popup style={{display: displayPopup}} result={result} title={'Bạn là  người thế nào?'} startQuiz={this.handleStartQuiz}/>
 
                 <div className="row">
                     <div className="col">
@@ -91,7 +90,7 @@ class Main extends React.Component {
                         </div>
                         <Answers questNum={questNum} answers={answers} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore}/>
                         <div id="submit">
-                            {showButton ? <button className="btn btn-lg btn-outline-primary" onClick={this.nextQuestion} >{questNum===total ? 'Finish quiz' : 'Next question'}</button> : null}
+                            {showButton ? <button className="btn btn-success btn-lg" onClick={this.nextQuestion} >{questNum===total ? 'Finish quiz' : 'Next question'}</button> : null}
                         </div>
                     </div>
                 </div>

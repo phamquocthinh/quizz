@@ -6,12 +6,12 @@ class Popup extends React.Component {
         
         this.state = {
             time: 'start',
-            title: 'Welcome to Quizz',
-            text: `This is a quiz application built using ReactJS <br>
-            <input class="form-control" type="text" placeholder="Name">
-            <input class="form-control" type="text" placeholder="Phone number">
-            <input class="form-control" type="text" placeholder="Email">`,
-            buttonText: 'Start the quiz' 
+            title: this.props.title,
+            text: `
+                <input class="form-control" type="text" placeholder="Name">
+                <input class="form-control" type="text" placeholder="Phone number">
+                <input class="form-control" type="text" placeholder="Email">`,
+            buttonText: 'Bắt đầu' 
         }
         
         this.popupHandle = this.popupHandle.bind(this)

@@ -4,7 +4,7 @@ class Answers extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            classNames: ['row', 'row', 'row', 'row']
+            classNames: ['row', 'row']
         }
         
         this.getAnswer = this.getAnswer.bind(this)
@@ -13,12 +13,13 @@ class Answers extends React.Component {
     getAnswer(e) {
         let elem = e.currentTarget
         let { increaseScore, questNum } = this.props
-        let answer = Number(elem.dataset.id)
+        let pos = Number(elem.dataset.id)
         let {classNames} = this.state
+        let ans = elem.dataset.value
 
-        classNames = ['row', 'row', 'row', 'row']
-        classNames[answer-1] += ' right'
-        increaseScore(questNum, answer)
+        classNames = ['row', 'row']
+        classNames[pos-1] += ' right'
+        increaseScore(questNum, ans)
         
         this.setState({
             classNames
@@ -29,7 +30,7 @@ class Answers extends React.Component {
     
     shouldComponentUpdate() {
         this.setState({
-            classNames: ['row', 'row', 'row', 'row']
+            classNames: ['row', 'row']
         })
         return true
     }
@@ -37,14 +38,13 @@ class Answers extends React.Component {
     render() {
         let { answers } = this.props
         let { classNames } = this.state
-        
+        const items = []
+
         return (
             <div id="answers">
                 <ul>
-                    <li onClick={this.getAnswer} className={classNames[0]} data-id="1"> <p>{answers[0]}</p></li>
-                    <li onClick={this.getAnswer} className={classNames[1]} data-id="2"> <p>{answers[1]}</p></li>
-                    <li onClick={this.getAnswer} className={classNames[2]} data-id="3"> <p>{answers[2]}</p></li>
-                    <li onClick={this.getAnswer} className={classNames[3]} data-id="4"> <p>{answers[3]}</p></li>
+                    <li onClick={this.getAnswer} className={classNames[0]} data-id="1" data-value={answers[0].ans}> <p>{answers[0].data}</p></li>
+                    <li onClick={this.getAnswer} className={classNames[1]} data-id="2" data-value={answers[1].ans}> <p>{answers[1].data}</p></li>
                 </ul>
             </div>
         )
