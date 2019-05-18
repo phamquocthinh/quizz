@@ -1,53 +1,55 @@
-import React from 'react'
+import React from 'react';
 
 class Popup extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         
         this.state = {
             time: 'start',
             title: this.props.title,
             text: `
-                <input class="form-control" type="text" placeholder="Name">
-                <input class="form-control" type="text" placeholder="Phone number">
-                <input class="form-control" type="text" placeholder="Email">`,
-            buttonText: 'Bắt đầu' 
-        }
+            <input class="form-control" type="text" placeholder="Name">
+            <input class="form-control" type="text" placeholder="Phone number">
+            <input class="form-control" type="text" placeholder="Email">`,
+            buttonText: 'Start the quiz',
+            exit: false
+        };
         
-        this.popupHandle = this.popupHandle.bind(this)
+        this.popupHandle = this.popupHandle.bind(this);
     }
     
     popupHandle() {
-        let { time } = this.state
+        let { time, exit } = this.state
+
+        if (exit) location.reload()
         
         if(time === 'start'){
             this.setState({
                 time: 'end',
                 title: 'Congratulations!',
-                buttonText: 'Restart'
-            })
+                text: 'You have completed the quiz',
+                buttonText: 'Get Result'
+            });
             
-            this.props.startQuiz()
+            this.props.startQuiz();
         } else {            
-            location.reload()// restart the application
+            this.setState({
+                text: 'Kiểu người của bạn là: ' + this.props.type,
+                buttonText: 'Exit',
+                exit: true
+            })
         }
     }
     
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            text: 'You have completed the quiz. <br /> //CHART WILL BE HERE<strong>'
-        })
-    }
-    
     createMarkup(text) {
-        return {__html: text}
+        return {__html: text};
     }
     
     render() {
        
-        let { title, text, buttonText } = this.state
+        let { title, text, buttonText } = this.state;
         
-        let { style } = this.props
+        let { style } = this.props;
         
         return (
             <div className="popup-container" style={style}>
@@ -59,7 +61,7 @@ class Popup extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 

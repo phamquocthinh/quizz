@@ -12,9 +12,9 @@ class Main extends React.Component {
             total: data.length,
             showButton: false,
             questionAnswered: false,
-            score: 0,
             displayPopup: 'flex',
-            result: {}
+            result: {},
+            personalType: ''
         }
         this.nextQuestion = this.nextQuestion.bind(this)
         this.handleShowButton = this.handleShowButton.bind(this)
@@ -36,20 +36,18 @@ class Main extends React.Component {
     }
 
     nextQuestion() {
-        let { questNum, total, score } = this.state
-
-        if(questNum === total){
-            this.setState({
-                displayPopup: 'flex'
-            })
-        } else {
+        let { questNum, total } = this.state
+        
+        if (questNum != total) {
             this.pushData(questNum)
             this.setState({
                 showButton: false,
                 questionAnswered: false
             })
+            return
         }
 
+        this.handleEndQuiz()
     }
 
     handleShowButton() {
@@ -69,19 +67,48 @@ class Main extends React.Component {
     handleIncreaseScore(ques, ans) {
         let {result} = this.state
         result[ques] = ans
-        console.log(result)
+
         this.setState({
             result
         })
     }
 
+    handleEndQuiz() {
+        let {result} = this.state
+        
+        let data = {
+            d: 0,
+            u: 0,
+            l: 0,
+            r: 0
+        }
+
+        for (const i in result) {
+            data[result[i]]++
+        }
+        
+        let x = data['u'] - data['d']
+        let y = data['r'] - data['l']
+        let type
+
+        if (x >= 0 && y >= 0) type = 'Điều hành'
+        if (x >= 0 && y < 0) type = 'Biểu cảm'
+        if (x < 0 && y >= 0) type = 'Phân tích'
+        if (x < 0 && y < 0) type = 'Hòa nhã'
+
+        this.setState({
+            personalType: type,
+            displayPopup: 'flex'
+        })
+    }
+
     render() {
-        let { questNum, total, answers, showButton, questionAnswered, displayPopup, result} = this.state
+        let { questNum, total, answers, showButton, questionAnswered, displayPopup, personalType, result} = this.state
 
         return (
             <div className="container">
 
-                <Popup style={{display: displayPopup}} result={result} title={'Bạn là  người thế nào?'} startQuiz={this.handleStartQuiz}/>
+                <Popup style={{display: displayPopup}} result={result} type={personalType} title={'Bạn là  người thế nào?'} startQuiz={this.handleStartQuiz}/>
 
                 <div className="row">
                     <div className="col">
