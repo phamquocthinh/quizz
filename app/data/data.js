@@ -128,5 +128,109 @@ export default [
                 ans: "r"
             }
         ] 
+    },
+    {
+        question: "11",
+        answers: [
+            {
+                data: "Thiên về khía cạnh con người khi giải quyết vấn đề",
+                ans: "d"
+            },
+            {
+                data: "Thiên về khía cạnh công việc khi giải quyết vấn đề",
+                ans: "u"
+            }
+        ] 
+    },
+    {
+        question: "12",
+        answers: [
+            {
+                data: "Cần thời gian để ra quyết định",
+                ans: "l"
+            },
+            {
+                data: "Quyết định nhanh chóng",
+                ans: "r"
+            }
+        ] 
+    },
+    {
+        question: "13",
+        answers: [
+            {
+                data: "Cách nói chuyện vui nhộn, khôi hài",
+                ans: "d"
+            },
+            {
+                data: "Cách nói chuyện nghiêm túc, nghiêm trang",
+                ans: "u"
+            }
+        ] 
+    },
+    {
+        question: "14",
+        answers: [
+            {
+                data: "Không chấp nhận rủi ro/Ít nắm bắt cơ hội",
+                ans: "l"
+            },
+            {
+                data: "Tận dụng các cơ hội/Chấp nhận rủi ro",
+                ans: "r"
+            }
+        ] 
+    },
+    {
+        question: "15",
+        answers: [
+            {
+                data: "Ra quyết định dựa trên cảm tính",
+                ans: "d"
+            },
+            {
+                data: "Ra quyết định dựa trên cơ sở thực tế",
+                ans: "u"
+            }
+        ] 
+    },
+    {
+        question: "16",
+        answers: [
+            {
+                data: "Ít tạo ra áp lực lên các quyết định của người khác",
+                ans: "l"
+            },
+            {
+                data: "Tạo ra nhiều áp lực lên quyết định của người khác",
+                ans: "r"
+            }
+        ] 
+    },
+    {
+        question: "17",
+        answers: [
+            {
+                data: "Có khuynh hướng kể chuyện và biểu lộ cảm ",
+                ans: "d"
+            },
+            {
+                data: "Ít có khuynh hướng kể chuyện và biểu lộ cảm xúc",
+                ans: "u"
+            }
+        ] 
+    },
+    {
+        question: "18",
+        answers: [
+            {
+                data: "Nhìn vào mắt người đối diện khi giao tiếp",
+                ans: "l"
+            },
+            {
+                data: "Ít nhìn vào mắt người đối diện khi giao tiếp",
+                ans: "r"
+            }
+        ] 
     }
 ];
