@@ -108,11 +108,11 @@ class Main extends React.Component {
         return (
             <div className="container">
 
-                <Popup style={{display: displayPopup}} result={result} type={personalType} title={'Bạn là  người thế nào?'} startQuiz={this.handleStartQuiz}/>
+                <Popup style={{display: displayPopup}}  result={result} type={personalType} title={'Bạn là  người thế nào?'} startQuiz={this.handleStartQuiz}/>
 
                 <div className="row">
                     <div className="col">
-                        <div id="question" className="col-6 align-self-center">
+                        <div id="question" className="col-6">
                             <p>Question {questNum}/{total}</p>
                         </div>
                         <Answers questNum={questNum} answers={answers} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore}/>

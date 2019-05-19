@@ -1,9 +1,27 @@
 body {
     background-color: #e4e4e4;
     background-image: url('/images/bg.jpg');
-	font-family: system-ui, Roboto, sans-serif;
+	font-family: American Typewriter, sans-serif;
     margin-top: 10%;
     margin-bottom: 50px;
+}
+
+input {
+    width: 70%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-bottom: 2px;
+}
+
+.btnConfirm {
+    background-color: #0094da;
+}
+
+.formErrors p {
+    color: red;
+    font-size: 12px;
+    margin: auto;
 }
 
 #question {
@@ -19,8 +37,7 @@ body {
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 2px;
-    padding-left: 50px;
-    padding-right: 50px;
+    margin: auto;
 }
 
 #answers ul{
@@ -37,8 +54,9 @@ body {
     border: 2px solid #0094da;
     border-radius: 10px;
     min-height: 70px;
-    width: 100%;
+    width: 80%;
     display: flex;
+    margin: auto;
     margin-bottom: 30px;
     transition: color .3s ease, border-color .3s ease, transform .3s ease;
     cursor: pointer;
@@ -48,6 +66,7 @@ body {
     color: #0b0e21;
     font-size: 1.2rem;
     font-weight: 500;
+    text-align: center;
     flex: calc(100% - 75px);
     margin: auto 20px;
     transition: color .3s ease;
@@ -106,7 +125,6 @@ body {
 }
 
 .popup p {
-    font-size: 18px;
     letter-spacing: 1px;
     margin: 20px 10% 0;
     margin-bottom: 20px;
