@@ -42,10 +42,11 @@ class Answers extends React.Component {
 
         return (
             <div id="answers">
+            {answers ? 
                 <ul>
                     <li onClick={this.getAnswer} className={classNames[0]} data-id="1" data-value={answers[0].ans}> <p>{answers[0].data}</p></li>
                     <li onClick={this.getAnswer} className={classNames[1]} data-id="2" data-value={answers[1].ans}> <p>{answers[1].data}</p></li>
-                </ul>
+                </ul> : null}
             </div>
         )
     }

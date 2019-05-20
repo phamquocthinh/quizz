@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin panel</title>
+  <!-- <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <div id="loginbox" style="margin-top:50px" class="mainbox col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+      <div class="card">
+        <div class="card-header bg-info border border-info">
+          <div class="text-white">Sign In</div>
+          <!--<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>-->
+        </div>
+        <div class="card-body bg-light border border-info">
+          <% if (message.length > 0) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= message %>
+            </div>
+            <% } %>
+              <form id="loginform" role="form" method="post" action="/account/login">
+                <div class="form-group">
+                  <label for="login-username">Username</label>
+                  <input type="text" class="form-control" id="login-username" name="user_name" value="" placeholder="username">
+                </div>
+                <div class="form-group">
+                  <label for="login-password">Password</label>
+                  <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+                </div>
+                <button id="btn-login" type="submit" class="btn btn-success">Login </button>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% include footer.ejs %></div>

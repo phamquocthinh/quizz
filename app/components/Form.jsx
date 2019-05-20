@@ -84,7 +84,17 @@ class Form extends React.Component {
         event.preventDefault()
         let { name, email, phoneNumber, formErrors } = this.state
         if (name && email && phoneNumber && !formErrors.email && !formErrors.phoneNumber) {
-            this.props.handleSubmit()
+            fetch('/user/', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({
+                    name,
+                    email,
+                    phoneNumber
+                })
+            }).then(() => {
+                this.props.handleSubmit()
+            })
         } else {
             return
         }  

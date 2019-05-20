@@ -1,0 +1,35 @@
+</body>
+
+<script>
+
+	// *** notify
+	function notify(type, text) {
+		var span = document.createElement("span");
+		var successElement = document.getElementById('notify-success');
+		var errorElement = document.getElementById('notify-error');
+
+		if (type === 'success') {
+			span.innerText = text;
+			successElement.appendChild(span);
+			successElement.style.display = 'block';
+			window.setTimeout(function () {
+				span.innerText = '';
+				successElement.appendChild(span);
+				successElement.style.display = 'none';
+			}, 10000);
+		} else {
+			span.innerText = text;
+			errorElement.appendChild(span);
+			errorElement.style.display = 'block';
+			window.setTimeout(function () {
+				span.innerText = '';
+				errorElement.appendChild(span);
+				errorElement.style.display = 'none';
+			}, 3000);
+		}
+	}
+</script>
+
+
+
+</html>

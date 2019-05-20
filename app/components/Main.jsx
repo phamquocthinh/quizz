@@ -1,5 +1,4 @@
 import React from 'react'
-import data from '../data/data'
 import Answers from 'Answers'
 import Popup from 'Popup'
 import Footer from 'Footer'
@@ -8,8 +7,10 @@ class Main extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            title: 'KIỂU NGƯỜI CỦA BẠN LÀ GÌ?',
             questNum: 0,
-            total: data.length,
+            total: 0,
+            data: [],
             showButton: false,
             questionAnswered: false,
             displayPopup: 'flex',
@@ -23,6 +24,7 @@ class Main extends React.Component {
     }
 
     pushData(questNum) {
+        let {data} = this.state
         this.setState({
             question: data[questNum].question,
             answers: data[questNum].answers,
@@ -32,7 +34,18 @@ class Main extends React.Component {
 
     componentWillMount() {
         let { questNum } = this.state
-        this.pushData(questNum)
+        fetch('/question/', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'}
+        }).then(response => response.json())
+        .then(json => {
+            this.setState({ 
+                data: json.data,
+                total: json.data.length
+             })
+            this.pushData(questNum)
+        });
+        
     }
 
     nextQuestion() {
@@ -76,7 +89,7 @@ class Main extends React.Component {
     handleEndQuiz() {
         let {result} = this.state
         
-        let data = {
+        let resultData = {
             d: 0,
             u: 0,
             l: 0,
@@ -84,11 +97,11 @@ class Main extends React.Component {
         }
 
         for (const i in result) {
-            data[result[i]]++
+            resultData[result[i]]++
         }
         
-        let x = data['u'] - data['d']
-        let y = data['r'] - data['l']
+        let x = resultData['u'] - resultData['d']
+        let y = resultData['r'] - resultData['l']
         let type
 
         if (x >= 0 && y >= 0) type = 'Điều hành'
@@ -103,21 +116,32 @@ class Main extends React.Component {
     }
 
     render() {
-        let { questNum, total, answers, showButton, questionAnswered, displayPopup, personalType, result} = this.state
+        let { 
+            questNum,
+            data,
+            total, 
+            answers, 
+            showButton, 
+            questionAnswered, 
+            displayPopup, 
+            personalType, 
+            result,
+            title
+        } = this.state
 
         return (
             <div className="container">
 
-                <Popup style={{display: displayPopup}}  result={result} type={personalType} title={'Bạn là  người thế nào?'} startQuiz={this.handleStartQuiz}/>
+                <Popup style={{display: displayPopup}}  result={result} type={personalType} title={title} startQuiz={this.handleStartQuiz}/>
 
                 <div className="row">
                     <div className="col">
                         <div id="question" className="col-6">
-                            <p>Question {questNum}/{total}</p>
+                            <p>Câu hỏi {questNum}/{total}</p>
                         </div>
                         <Answers questNum={questNum} answers={answers} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore}/>
                         <div id="submit">
-                            {showButton ? <button className="btn btn-success btn-lg" onClick={this.nextQuestion} >{questNum===total ? 'Finish quiz' : 'Next question'}</button> : null}
+                            {showButton ? <button className="btn btn-success btn-lg" onClick={this.nextQuestion} >{questNum===total ? 'Hoàn thành' : 'Tiếp theo'}</button> : null}
                         </div>
                     </div>
                 </div>

@@ -64,7 +64,7 @@ class Popup extends React.Component {
             this.props.startQuiz();
         } else {            
             this.setState({
-                text: 'Kiểu người của bạn là: ' + this.props.type,
+                text: `Kiểu người của bạn là:\n ' + ${this.props.type.toUpperCase()}`,
                 buttonText: 'Thoát',
                 showButton: true,
                 showForm: false,
