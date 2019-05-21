@@ -8,10 +8,11 @@ class Popup extends React.Component {
         this.state = {
             time: 'start',
             title: this.props.title,
-            text: '',
+            text: 'Chọn 1 trong 2 câu mà bạn nghĩ đó là những điều mà người khác cảm nhận về bạn. Cố gắng trả lời khách quan và chân thật. Kể cả hai ý bạn thấy không phù hợp cũng chọn một ý gần đúng nhất với bạn',
             buttonText: 'Bắt đầu',
             showButton: false,
             showForm: true,
+            showResult: false,
             exit: false
         };
         
@@ -29,13 +30,15 @@ class Popup extends React.Component {
                 time: 'end',
                 title: 'Chúc mừng!',
                 text: 'Bạn đã hoàn thành bài kiểm tra',
+                showResult: true,
                 buttonText: 'Xem kết quả',
             });
             
             this.props.startQuiz();
         } else {            
             this.setState({
-                text: 'Kiểu người của bạn là: ' + this.props.type,
+                text: `Kiểu người của bạn là:<br> <strong>${this.props.type.toUpperCase()}</strong><br>
+                <img src="/images/result.jpg" />`,
                 buttonText: 'Thoát',
                 exit: true
             })
@@ -50,27 +53,17 @@ class Popup extends React.Component {
         let { time, exit } = this.state
 
         if (exit) location.reload()
+    
+        this.setState({
+            time: 'end',
+            title: 'Chúc mừng!',
+            text: 'Bạn đã hoàn thành bài kiểm tra',
+            buttonText: 'Xem kết quả',
+            showButton: true,
+            showForm: false
+        });
         
-        if(time === 'start'){
-            this.setState({
-                time: 'end',
-                title: 'Chúc mừng!',
-                text: 'Bạn đã hoàn thành bài kiểm tra',
-                buttonText: 'Xem kết quả',
-                showButton: true,
-                showForm: false
-            });
-            
-            this.props.startQuiz();
-        } else {            
-            this.setState({
-                text: `Kiểu người của bạn là:\n ' + ${this.props.type.toUpperCase()}`,
-                buttonText: 'Thoát',
-                showButton: true,
-                showForm: false,
-                exit: true
-            })
-        }
+        this.props.startQuiz();
     }
     
     render() {

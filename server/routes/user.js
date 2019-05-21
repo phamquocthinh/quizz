@@ -1,11 +1,30 @@
 const express = require('express')
+const moment = require('moment')
 
 const Users = require('../models/user')
 
 let user = express.Router()
 
 user.get('/', async(req, res) => {
-    let usersList = await Users.find()
+    let daysAgo = req.query.daysAgo
+    let condition = {}
+    let usersList = []
+
+    if (daysAgo) {
+        let today = moment().format("YYYY-MM-DD") + 'T23:59:59'
+        let fromTime = moment(today).subtract(parseInt(daysAgo), 'days').toDate()
+
+        condition = {
+            createdAt: {
+                $gte: fromTime
+            }
+        }
+
+        usersList = await Users.find(condition).sort({'createdAt': -1})
+    } else {
+        usersList = await Users.find().sort({'createdAt': -1}).limit(100)
+    }
+
     return res.render('user', { data: usersList })
 })
 

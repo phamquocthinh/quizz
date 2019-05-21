@@ -11,7 +11,7 @@ question.get('/', async(req, res) => {
 
 question.post('/', async(req, res) => {
     try {
-        let data = await Questions.find()
+        let data = await Questions.find().limit(2)
         return res.json({message: 'ok', data})
     } catch(e) {
         res.json({message: 'error', data: {}})

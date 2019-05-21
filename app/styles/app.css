@@ -125,13 +125,25 @@ input {
 }
 
 .popup p {
-    letter-spacing: 1px;
     margin: 20px 10% 0;
     margin-bottom: 20px;
 }
 
+.popup strong {
+    color: #0094da;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    font-size: 1.5rem
+}
+
+.popup img {
+    max-width: 300px;
+    border-radius: 10px;
+}
+
 .popup .btn{
     margin: 20px auto;
+    background-color: #0094da;
 }
 
 footer {
