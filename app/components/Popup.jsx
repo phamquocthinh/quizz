@@ -37,8 +37,12 @@ class Popup extends React.Component {
             this.props.startQuiz();
         } else {            
             this.setState({
-                text: `Kiểu người của bạn là:<br> <strong>${this.props.type.toUpperCase()}</strong><br>
-                <img src="/images/result.jpg" />`,
+                title: 'Bạn là kiểu người',
+                text: `<strong>${this.props.type.toUpperCase()}</strong>
+                <div class="d-flex justify-content-between bd-highlight mb-3">
+                    <div class="p-2 flex-fill bd-highlight"><img src="/images/result.jpg" /></div>
+                    <div class="p-2 flex-fill bd-highlight"><p>${'Type define go here Type define go here Type define go here Type define go here Type define go here'}</p</div>
+                </div>`,
                 buttonText: 'Thoát',
                 exit: true
             })

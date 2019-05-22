@@ -105,13 +105,13 @@ class Form extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <div className="form-row">
                     <div className="col-12">
-                        <input type="text" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Name"/>
+                        <input type="text" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="Họ và tên"/>
                     </div>
                     <div className="col-12">
-                        <input type="text" name="email" value={this.state.email} onChange={this.handleInputChange} placeholder="Email"/>
+                        <input type="text" name="email" value={this.state.email} onChange={this.handleInputChange} placeholder="Địa chỉ email"/>
                     </div>
                     <div className="col-12">
-                        <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleInputChange} placeholder="Phone Number"/>
+                        <input type="text" name="phoneNumber" value={this.state.phoneNumber} onChange={this.handleInputChange} placeholder="Số điện thoại"/>
                     </div>
                     <div className="col-12">
                         <FormErrors formErrors={this.state.formErrors} />
