@@ -4,7 +4,9 @@
     <div style="height:auto; margin-top: 30px; margin-left: 20px; margin-right: 20px; background-color: white;">
         <% data.forEach(item => { %>
         <p><strong>Question:</strong> <%=item.question%></p>
-        <table class="table table-striped table-bordered table-hover table-responsive">
+        <button type="button" class="btnEdit btn btn-outline-dark" onclick="saveQuestion('<%=item._id%>')">Save</button>
+        <button type="button" class="btnDelete btn btn-outline-danger" disabled onclick="deleteQuestion('<%=item._id%>')">Delete</button>
+        <table class="table table-striped table-bordered table-hover table-responsive" data-id="<%=item._id%>">
             <thead>
                 <tr>
                     <th style="width:100%">
@@ -18,8 +20,8 @@
             <tbody>
                 <% item.answers.forEach(i => { %>
                 <tr>
-                    <td><%=i.data%></td>
-                    <td><%=i.ans%></td>
+                    <td class="ansdata" contenteditable="true"><%=i.data%></td>
+                    <td class="anstype" contenteditable="true"><%=i.ans%></td>
                 </tr>
                 <%})%>
         </tbody>
@@ -29,7 +31,65 @@
     </div>
 <% } %>
 <script>
-    
+    function saveQuestion(id) {
+        if (confirm('Confirm change question data?')) {
+            let answersTags = $(`table[data-id=${id}] tbody tr`).toArray()
+            let answers = []
+            let isContinue = true
+
+            answersTags.forEach(function(tag) {
+                let data = $(tag).find(".ansdata")[0].innerText
+                let type = $(tag).find(".anstype")[0].innerText
+
+                if (['d', 'u', 'l', 'r'].indexOf(type) < 0) isContinue = false
+
+                answers.push({
+                    data: data,
+                    ans: type
+                })
+            })
+            
+            if(!isContinue) {
+                alert('Answer type must be d, u, l or r')
+                return
+            }
+
+            let data = {
+                id,
+                answers
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'question/update/',
+                contentType: 'application/json',
+                data: JSON.stringify(data), // access in body
+            }).done(function () {
+                alert('Question data saved')
+            }).fail(function (msg) {
+                alert('Fail')
+            })
+        }
+    }
+
+    function deleteQuestion(id) {
+        if (confirm('Confirm delete question data?')) {
+            let data = {
+                id
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: 'question/delete/',
+                contentType: 'application/json',
+                data: JSON.stringify(data), // access in body
+            }).done(function () {
+                alert('Question data deleted')
+            }).fail(function (msg) {
+                alert('Fail')
+            })
+        }
+    }
 </script>
 
 <% include footer.ejs %>

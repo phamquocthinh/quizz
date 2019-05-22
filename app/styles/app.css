@@ -106,6 +106,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: scroll;
 }
 
 .popup {
@@ -113,7 +114,6 @@ input {
     background-color: #fff;
     margin: auto;
     border-radius: 10px;
-    overflow: hidden;
 }
 
 .popup h1 {
@@ -123,6 +123,24 @@ input {
     padding: 20px;
     margin-top: 5px;
     border-radius: 10px;
+}
+.popup .popupContent {
+    width: 100%;
+    height: 220px
+}
+
+.popup .guideText {
+    font-size: smaller
+}
+
+.popup .imgRes {
+    float: left;
+    width: 50%;
+}
+
+.popup .defineRes {
+    float: right;
+    width: 50%;
 }
 
 .popup p {
@@ -175,12 +193,35 @@ footer span {
         padding-left: 10px;
         padding-right: 10px;
     }
+
+    .popup h1 {
+        font-size: large
+    }
     
     #answers li {
         width: 100%;
     }
     
     #submit button {
+        width: 50%;
+    }
+
+    .popup input {
+        width: 100%;
+    }
+
+    .popup .popupContent {
+        width: 100%;
+        height: auto
+    }
+
+    .popup .imgRes {
+        margin: auto;
+        width: 100%;
+        margin-bottom: 5px 
+    }
+    
+    .popup .defineRes {
         width: 100%;
     }
 }
