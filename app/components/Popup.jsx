@@ -19,9 +19,24 @@ class Popup extends React.Component {
         this.popupHandle = this.popupHandle.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    componentDidMount() {
+        fetch('/description/list', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'}
+        }).then(response => response.json())
+        .then(json => {
+            this.setState({ 
+                data: json.data
+             })
+        });
+        
+    }
     
     popupHandle() {
-        let { time, exit } = this.state
+        let { time, exit, data } = this.state
+        let { type } = this.props
+        let des = ''
 
         if (exit) location.reload()
         
@@ -35,13 +50,29 @@ class Popup extends React.Component {
             });
             
             this.props.startQuiz();
-        } else {            
+        } else {
+            switch(type) {
+                case 'Điều hành':
+                    des = data['dieuhanh']
+                    break
+                case 'Biểu cảm':
+                    des = data['bieucam']
+                    break
+                case 'Phân tích':
+                    des = data['phantich']
+                    break
+                case 'Hòa nhã':
+                    des = data['hoanha']
+                    break
+
+            }
+
             this.setState({
                 title: 'Bạn là kiểu người',
-                text: `<div><strong>${this.props.type.toUpperCase()}</strong><div>
+                text: `<div><strong>${type.toUpperCase()}</strong><div>
                 <div class="popupContent">
                     <div class="imgRes"><img src="/images/result.png" /></div>
-                    <div class="defineRes"><p>${'Type define go here Type define go here Type define go here Type define go here Type define go here'}</p</div>
+                    <div class="defineRes"><p>${des}</p</div>
                 </div>
                 `,
                 buttonText: 'Thoát',

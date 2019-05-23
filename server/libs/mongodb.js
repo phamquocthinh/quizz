@@ -6,7 +6,7 @@ module.exports = {
         console.log(`Starting mongoose at ${mongoUrl}`)
 
         try {
-            const conn = await mongoose.connect(mongoUrl)
+            const conn = await mongoose.connect(mongoUrl, { useNewUrlParser: true })
     
             console.log(`Mongoose connected...`)
         

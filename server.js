@@ -10,6 +10,7 @@ mongoDb.connect()
 const account = require('./server/routes/account')
 const user = require('./server/routes/user')
 const question = require('./server/routes/question')
+const description = require('./server/routes/description')
 
 let app = express();
 const PORT = process.env.PORT || 3000;
@@ -58,6 +59,7 @@ app.use((req, res, next) => {
 
 app.use('/user', user)
 app.use('/question', question)
+app.use('/description', description)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

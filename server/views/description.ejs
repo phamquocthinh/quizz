@@ -1,0 +1,52 @@
+<% include header.ejs %>
+<div class="filter" style="margin-top: 20px; margin-left: 20px;">
+    <button type="button" class="btn btn-info btnFilter" onclick="saveData()">Save</button>
+</div>
+<div style="height:auto; margin-top: 10px; margin-left: 20px; margin-right: 20px; background-color: white;">
+<% if(data) { %>
+    <div>
+        <div class="form-group">
+            <label>Điều hành</label>
+            <textarea class="form-control" name="dieuhanh"  rows="3"><%=data['dieuhanh']%></textarea>
+        </div>
+        <div class="form-group">
+            <label>Biểu cảm</label>
+            <textarea class="form-control" name="bieucam" rows="3"><%=data['bieucam']%></textarea>
+        </div>
+        <div class="form-group">
+            <label>Phân tích</label>
+            <textarea class="form-control" name="phantich" rows="3"><%=data['phantich']%></textarea>
+        </div>
+        <div class="form-group">
+            <label>Hòa nhã</label>
+            <textarea class="form-control" name="hoanha" rows="3"><%=data['hoanha']%></textarea>
+        </div>
+    </div>
+    
+<% } %>
+</div>
+<script>
+    function saveData(id) {
+        if (confirm('Confirm change description data?')) {
+            let data = {
+                'dieuhanh': $('textarea[name="dieuhanh"]').val(),
+                'bieucam': $('textarea[name="bieucam"]').val(),
+                'phantich': $('textarea[name="phantich"]').val(),
+                'hoanha': $('textarea[name="hoanha"]').val()
+            }
+            
+            $.ajax({
+                type: 'POST',
+                url: 'description/',
+                contentType: 'application/json',
+                data: JSON.stringify(data), // access in body
+            }).done(function () {
+                alert('Description data saved')
+            }).fail(function (msg) {
+                alert('Fail')
+            })
+        }
+    }
+</script>
+
+<% include footer.ejs %>
