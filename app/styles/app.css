@@ -139,6 +139,7 @@ input {
 }
 
 .popup .defineRes {
+    text-align: left;
     float: right;
     width: 50%;
 }

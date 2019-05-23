@@ -64,8 +64,9 @@ class Popup extends React.Component {
                 case 'Hòa nhã':
                     des = data['hoanha']
                     break
-
             }
+
+            des = des ? des.replace(/\n/g, '<br>') : ''
 
             this.setState({
                 title: 'Bạn là kiểu người',
