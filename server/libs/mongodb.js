@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 module.exports = {
-    connect: async () => {
-        const mongoUrl =  `mongodb://localhost:27017/quizz`
+    connect: async (host, port) => {
+        const mongoUrl =  `mongodb://${host}:${port}/quizz`
         console.log(`Starting mongoose at ${mongoUrl}`)
 
         try {
